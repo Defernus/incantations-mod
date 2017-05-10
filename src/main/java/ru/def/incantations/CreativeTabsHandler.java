@@ -1,4 +1,4 @@
-package ru.def.incatations;
+package ru.def.incantations;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
