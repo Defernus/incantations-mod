@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "incantations",
+  "name": "Incantations Mod",
+  "description": "Mod that adds to minecraft incantations!!!",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["Defernus"],
+  "credits": "Defernus",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
