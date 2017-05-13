@@ -7,26 +7,24 @@ import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import ru.def.incantations.items.ItemsRegister;
 
 /**
  * Created by Defernus on 10.05.2017.
  */
-public class CreativeTabsHandler extends CreativeTabs {
-
-	public static CreativeTabsHandler MY_TAB;
-
-	public static void tabRegister(){
-		MY_TAB=new CreativeTabsHandler(CreativeTabs.getNextID(),"my_tab");
-	}
+public class CreativeTabsHandler {
 
 	private final ItemStack iconItem=Items.ENCHANTED_BOOK.getEnchantedItemStack(new EnchantmentData(new EnchantmentArrowInfinite(Enchantment.Rarity.COMMON,EntityEquipmentSlot.CHEST), 0));
 
-	public CreativeTabsHandler(int index, String label) {
-		super(index, label);
-	}
-
-	@Override
-	public ItemStack getTabIconItem() {
-		return iconItem;
-	}
+	public static final CreativeTabs MY_TAB = new CreativeTabs("my_tab")
+	{
+		@Override
+		@SideOnly(Side.CLIENT)
+		public ItemStack getTabIconItem()
+		{
+			return new ItemStack(ItemsRegister.INCANTATIONS_BOOK_TAB);
+		}
+	};
 }

@@ -28,7 +28,6 @@ public class Core
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		CreativeTabsHandler.tabRegister();
 		proxy.preInit(event);
 	}
 	@EventHandler

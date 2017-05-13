@@ -1,8 +1,17 @@
 package ru.def.incantations.proxy;
 
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import ru.def.incantations.Commands.CommandExplStr;
+import ru.def.incantations.Core;
+import ru.def.incantations.blocks.BlocksRegister;
+import ru.def.incantations.entity.EntityRegister;
+import ru.def.incantations.gui.GuiHandler;
+import ru.def.incantations.items.ItemsRegister;
 
 /**
  * Created by Defernus on 10.05.2017.
@@ -10,7 +19,11 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
-
+		ClientCommandHandler.instance.registerCommand(new CommandExplStr());
+		ItemsRegister.registerItems();
+		BlocksRegister.registerBlocks();
+		EntityRegister.register();
+		NetworkRegistry.INSTANCE.registerGuiHandler(Core.instance, new GuiHandler());
 	}
 
 	public void init(FMLInitializationEvent event) {

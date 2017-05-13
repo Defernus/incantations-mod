@@ -1,1 +1,8 @@
+#creative tabs
 itemGroup.my_tab=Заклинания
+
+#items
+item.incantations_book_ta.name=Книга заклинаний
+
+#block
+tile.book_monument.name=Стойка для книги заклинаний

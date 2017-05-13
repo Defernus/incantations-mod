@@ -1,0 +1,89 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"particle":"blocks/stone",
+		"0": "incantations:blocks/book_monument"
+	},
+	"elements": [
+		{
+			"name": "cube",
+			"from": [1, 0, 1],
+			"to": [15, 1, 15],
+			"shade": true,
+			"faces": {
+				"north": {"uv": [0.5, 0, 7.5, 0.5], "texture": "#0"},
+				"east": {"uv": [0.5, 0, 7.5, 0.5], "texture": "#0"},
+				"south": {"uv": [0.5, 0, 7.5, 0.5], "texture": "#0"},
+				"west": {"uv": [0.5, 0, 7.5, 0.5], "texture": "#0"},
+				"up": {"uv": [0.5, 8.5, 7.5, 15.5], "texture": "#0"},
+				"down": {"uv": [8.5, 0.5, 15.5, 7.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "cube",
+			"from": [4, 5, 4],
+			"to": [12, 12, 12],
+			"shade": true,
+			"faces": {
+				"north": {"uv": [1.5, 0, 5.5, 3.5], "texture": "#0"},
+				"east": {"uv": [1.5, 0, 5.5, 3.5], "texture": "#0"},
+				"south": {"uv": [1.5, 0, 5.5, 3.5], "texture": "#0"},
+				"west": {"uv": [1.5, 0, 5.5, 3.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "cube",
+			"from": [2, 1, 2],
+			"to": [14, 2, 14],
+			"shade": true,
+			"faces": {
+				"north": {"uv": [1, 0, 7, 0.5], "texture": "#0"},
+				"east": {"uv": [1, 0, 7, 0.5], "texture": "#0"},
+				"south": {"uv": [1, 0, 7, 0.5], "texture": "#0"},
+				"west": {"uv": [1, 0, 7, 0.5], "texture": "#0"},
+				"up": {"uv": [1, 9, 7, 15], "texture": "#0"}
+			}
+		},
+		{
+			"name": "cube",
+			"from": [3, 2, 3],
+			"to": [13, 5, 13],
+			"shade": true,
+			"faces": {
+				"north": {"uv": [1, 0, 6, 1.5], "texture": "#0"},
+				"east": {"uv": [1, 0, 6, 1.5], "texture": "#0"},
+				"south": {"uv": [1, 0, 6, 1.5], "texture": "#0"},
+				"west": {"uv": [3, 0, 8, 1.5], "texture": "#0"},
+				"up": {"uv": [1.5, 9.5, 6.5, 14.5], "texture": "#0"},
+				"down": {"uv": [9.5, 1.5, 14.5, 6.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "cube",
+			"from": [2, 13, 2],
+			"to": [14, 14, 14],
+			"shade": true,
+			"faces": {
+				"north": {"uv": [2, 0, 8, 0.5], "texture": "#0"},
+				"east": {"uv": [0, 0, 6, 0.5], "texture": "#0"},
+				"south": {"uv": [2, 0, 8, 0.5], "texture": "#0"},
+				"west": {"uv": [1.5, 0, 7.5, 0.5], "texture": "#0"},
+				"up": {"uv": [9, 1, 15, 7], "texture": "#0"},
+				"down": {"uv": [7, 15, 1, 9], "texture": "#0"}
+			}
+		},
+		{
+			"name": "cube",
+			"from": [3, 12, 3],
+			"to": [13, 13, 13],
+			"shade": true,
+			"faces": {
+				"north": {"uv": [8, 0, 3, 0.5], "texture": "#0"},
+				"east": {"uv": [0.5, 0, 5.5, 0.5], "texture": "#0"},
+				"south": {"uv": [8, 0, 3, 0.5], "texture": "#0"},
+				"west": {"uv": [0.5, 0, 5.5, 0.5], "texture": "#0"},
+				"down": {"uv": [1.5, 9.5, 6.5, 14.5], "texture": "#0"}
+			}
+		}
+	]
+}
