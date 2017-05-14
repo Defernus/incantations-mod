@@ -10,6 +10,7 @@ import ru.def.incantations.Commands.CommandExplStr;
 import ru.def.incantations.Core;
 import ru.def.incantations.blocks.BlocksRegister;
 import ru.def.incantations.entity.EntityRegister;
+import ru.def.incantations.entity.TileEntityBookMonument;
 import ru.def.incantations.gui.GuiHandler;
 import ru.def.incantations.items.ItemsRegister;
 
@@ -23,7 +24,6 @@ public class CommonProxy {
 		ItemsRegister.registerItems();
 		BlocksRegister.registerBlocks();
 		EntityRegister.register();
-		NetworkRegistry.INSTANCE.registerGuiHandler(Core.instance, new GuiHandler());
 	}
 
 	public void init(FMLInitializationEvent event) {

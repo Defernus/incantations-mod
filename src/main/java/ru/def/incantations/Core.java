@@ -25,6 +25,8 @@ public class Core
 	@Mod.Instance
 	public static Core instance;
 
+
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{

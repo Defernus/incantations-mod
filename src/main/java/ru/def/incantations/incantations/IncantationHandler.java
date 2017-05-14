@@ -29,8 +29,6 @@ public class IncantationHandler {
 		RayTraceResult result = player.rayTrace(40f,0.2f);
 
 		if(!worldIn.isAirBlock(result.getBlockPos())){
-			player.sendMessage(new TextComponentString("cliced"));
-			player.sendMessage(new TextComponentString("succes"));
 			Vec3d v = result.hitVec;
 			worldIn.newExplosion(player, v.xCoord, v.yCoord, v.zCoord, explosionStr, false, true);
 

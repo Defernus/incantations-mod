@@ -12,19 +12,19 @@ import ru.def.incantations.entity.TileEntityBookMonument;
 
 public class RenderBookMonument extends TileEntitySpecialRenderer<TileEntityBookMonument> {
 
-	EntityItem item;
-
 	@Override
 	public void renderTileEntityAt(TileEntityBookMonument te, double x, double y, double z, float partialTicks, int destroyStage) {
-		item=new EntityItem(te.getWorld(),0,0,0,te.inv.getStackInSlot(0));
+
+		super.renderTileEntityAt(te,x,y,z,partialTicks,destroyStage);
+
+		EntityItem item=new EntityItem(te.getWorld(),0,0,0,((TileEntityBookMonument)te.getWorld().getTileEntity(te.getPos())).inv.getStackInSlot(0));
 
 		item.hoverStart=0;
-
-		super.renderTileEntityAt(te, x, y, z, partialTicks, destroyStage);
 
 		GlStateManager.pushMatrix();
 		{
 			GlStateManager.translate(x+0.5,y+0.5,z+0.5);
+			GlStateManager.rotate(180-te.yaw,0,1,0);
 
 			Minecraft.getMinecraft().getRenderManager().doRenderEntity(item,0,0,0,0,0,false);
 		}
