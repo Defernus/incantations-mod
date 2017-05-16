@@ -16,9 +16,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlocksRegister {
 
 	public static BlockBookMonument BOOK_MONUMENT=new BlockBookMonument(Material.ROCK);
+	public static BlockWritingTable WRITING_TABLE=new BlockWritingTable(Material.ROCK);
 
 	public static void registerBlocks() {
 		registerBlock(BOOK_MONUMENT);
+		registerBlock(WRITING_TABLE);
 	}
 
 	private static void registerBlock(final Block block)
@@ -29,6 +31,7 @@ public class BlocksRegister {
 
 	public static void registerRenders() {
 		registerRender(BOOK_MONUMENT);
+		registerRender(WRITING_TABLE);
 	}
 
 	@SideOnly(Side.CLIENT)

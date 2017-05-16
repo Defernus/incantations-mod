@@ -17,7 +17,7 @@ public class RenderBookMonument extends TileEntitySpecialRenderer<TileEntityBook
 
 		super.renderTileEntityAt(te,x,y,z,partialTicks,destroyStage);
 
-		EntityItem item=new EntityItem(te.getWorld(),0,0,0,((TileEntityBookMonument)te.getWorld().getTileEntity(te.getPos())).inv.getStackInSlot(0));
+		EntityItem item=new EntityItem(te.getWorld(),0,0,0,te.inv.getStackInSlot(0));
 
 		item.hoverStart=0;
 
