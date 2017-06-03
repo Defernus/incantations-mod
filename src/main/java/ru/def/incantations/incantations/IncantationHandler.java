@@ -160,25 +160,39 @@ public class IncantationHandler {
 		cd+=ItemRune.EnumRune.values()[runes[x+1][y]].getCD();
 
 		NBTTagCompound action_type_tag = new NBTTagCompound();
-		action_type_tag.setInteger("id", ItemRune.EnumRune.values()[runes[x+1][y]].getID());
+		action_type_tag.setInteger( "id", ItemRune.EnumRune.values()[runes[x+1][y]].getID() );
 
 		if(
-				!Objects.equals(ItemRune.EnumRune.values()[runes[x+2][y]].getType().substring(0,6), "action")||
+				!Objects.equals( ItemRune.EnumRune.values()[runes[x+2][y]].getType().substring(0,6), "action" )||
 						!Objects.equals(ItemRune.EnumRune.values()[runes[x+2][y]].getType().substring(7,ItemRune.EnumRune.values()[runes[x+2][y]].getType().length()), ItemRune.EnumRune.values()[runes[x+1][y]].getName()))return null;
 
 		power+=ItemRune.EnumRune.values()[runes[x+2][y]].getPower();
 		cd+=ItemRune.EnumRune.values()[runes[x+2][y]].getCD();
 
 		NBTTagCompound action_tag = new NBTTagCompound();
-		action_tag.setInteger("id", ItemRune.EnumRune.values()[runes[x+2][y]].getID());
+		action_tag.setInteger( "id", ItemRune.EnumRune.values()[runes[x+2][y]].getID() );
 
-		action_type_tag.setTag("action", action_tag);
+		action_type_tag.setTag( "action", action_tag );
 
-		activator_tag.setTag("action_type", action_type_tag);
+		activator_tag.setTag( "action_type", action_type_tag );
 
 		tag.setTag("activator", activator_tag);
 		tag.setInteger("CD", cd);
 		tag.setFloat("power", power);
+
+		int[] runes1 = new int[256];
+
+		for(int i = 0; i < runes1.length; i++) {
+			runes1[i] = 0;
+		}
+
+		for (int i = x; i < runes.length; i++) {
+			for (int j = y; j < runes[i].length; j++) {
+				runes1[(i-x)*16+(j-y)] = runes[i][j];
+			}
+		}
+
+		tag.setIntArray( "runes", runes1 );
 
 		return tag;
 	}

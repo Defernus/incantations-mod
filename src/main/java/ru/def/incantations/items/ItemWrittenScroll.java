@@ -12,7 +12,6 @@ public class ItemWrittenScroll extends Item {
 	public ItemWrittenScroll() {
 		this.setUnlocalizedName("scroll_written");
 		this.setRegistryName("scroll_written");
-		this.setCreativeTab(CreativeTabsHandler.MY_TAB);
 		this.setMaxStackSize(1);
 	}
 

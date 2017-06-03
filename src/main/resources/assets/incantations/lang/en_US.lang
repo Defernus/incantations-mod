@@ -9,6 +9,8 @@ item.basic_book.name=Basic incantations book
 item.ancient_book.name=Ancient incantations book
 item.legendary_book.name=Legendary incantations book
 item.mythical_book.name=Mythical incantations book
+item.scroll_blank.name=Blank scroll
+item.scroll_written.name=Written scroll
 
 item.rune.use.name=Rune of use
 item.rune.right_click.name=Activating rune

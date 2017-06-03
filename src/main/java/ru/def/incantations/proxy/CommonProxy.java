@@ -9,6 +9,7 @@ import ru.def.incantations.blocks.BlocksRegister;
 import ru.def.incantations.commands.CommandReloadMod;
 import ru.def.incantations.entity.EntityRegister;
 import ru.def.incantations.items.ItemsRegister;
+import ru.def.incantations.net.PacketHandler;
 import ru.def.incantations.world.generator.GeneratorsRegister;
 
 /**
@@ -22,6 +23,8 @@ public class CommonProxy {
 		ItemsRegister.registerItems();
 		BlocksRegister.registerBlocks();
 		EntityRegister.register();
+
+		PacketHandler.registerMessages();
 
 		GeneratorsRegister.register();
 	}

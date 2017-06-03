@@ -6,6 +6,8 @@ item.basic_book.name=Базовая книга заклинаний
 item.ancient_book.name=Древняя книга заклинаний
 item.legendary_book.name=Легендарная книга заклинаний
 item.mythical_book.name=Мифическая книга заклинаний
+item.scroll_blank.name=Пустой свиток
+item.scroll_written.name=Свиток с заклинанием
 
 item.rune.use.name=Руна использования
 item.rune.right_click.name=Активирующая руна
