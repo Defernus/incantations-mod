@@ -3,37 +3,92 @@ package ru.def.incantations.items;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.EnumRarity;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import ru.def.incantations.CreativeTabsHandler;
 import ru.def.incantations.incantations.IncantationHandler;
 
+import javax.annotation.Nullable;
+
 /**
  * Created by Defernus on 10.05.2017.
  */
 public class ItemIncantationsBook extends Item {
 
-	private final int INCANTATIONS_AMOUNT=2;
-	private final int BOOK_CD=40;
-	private final float POWER=10;
-	private final boolean isTabIcon;
+	public enum EnumBooks{
+		BASIC("basic_book", 0, 10, 40, 2, EnumRarity.COMMON),
+		ANCIENT("ancient_book", 1, 20, 30, 3, EnumRarity.UNCOMMON),
+		LEGENDARY("legendary_book", 2, 40, 20, 3, EnumRarity.RARE),
+		MYTHICAL("mythical_book", 3, 80, 10, 4, EnumRarity.EPIC);
 
-	public ItemIncantationsBook(boolean isTabIcon,String name) {
+		private final String NAME;
+		private final float POWER;
+		private final int ID, CD, AMOUNT;
+		private final EnumRarity RARITY;
 
-		this.setUnlocalizedName(name);
-		this.setRegistryName(name);
+		EnumBooks(String name, int id, float power, int cd, int amount, EnumRarity rarity){
+			NAME=name;
+			ID=id;
+			POWER=power;
+			CD=cd;
+			AMOUNT=amount;
+			RARITY=rarity;
+		}
+
+		public String getName(){
+			return NAME;
+		}
+
+		public int getID(){
+			return ID;
+		}
+
+		public int getAmount(){
+			return AMOUNT;
+		}
+
+		public int getCD(){
+			return CD;
+		}
+
+		public float getPower(){
+			return POWER;
+		}
+
+		public EnumRarity getRarity(){
+			return RARITY;
+		}
+	}
+
+	private final int INCANTATIONS_AMOUNT;
+	private final int BOOK_CD;
+	private final float POWER;
+	private final EnumRarity RARITY;
+
+	public ItemIncantationsBook(int tier) {
+
+		this.setUnlocalizedName(EnumBooks.values()[tier].getName());
+		this.setRegistryName(EnumBooks.values()[tier].getName());
 		this.setMaxStackSize(1);
-		if(!isTabIcon)this.setCreativeTab(CreativeTabsHandler.MY_TAB);
-		this.isTabIcon=isTabIcon;
+		this.setCreativeTab(CreativeTabsHandler.MY_TAB);
+
+		this.POWER = EnumBooks.values()[tier].getPower();
+		this.BOOK_CD = EnumBooks.values()[tier].getCD();
+		this.INCANTATIONS_AMOUNT = EnumBooks.values()[tier].getAmount();
+		this.RARITY = EnumBooks.values()[tier].getRarity();
+	}
+
+	@Override
+	public EnumRarity getRarity(ItemStack stack) {
+		return RARITY;
 	}
 
 	private void setNBT(ItemStack stack) {
@@ -42,9 +97,9 @@ public class ItemIncantationsBook extends Item {
 		stack.getTagCompound().setInteger("max_inc",INCANTATIONS_AMOUNT);
 		stack.getTagCompound().setFloat("max_pow",POWER);
 		stack.getTagCompound().setFloat("cur_pow",POWER);
-		stack.getTagCompound().setInteger("selected_inc",-1);
 		stack.getTagCompound().setInteger("cur_cd",BOOK_CD);
 		stack.getTagCompound().setInteger("max_cd",BOOK_CD);
+		stack.getTagCompound().setInteger("cur_inc",-1);
 
 		NBTBase value=new NBTTagCompound();
 
@@ -53,29 +108,9 @@ public class ItemIncantationsBook extends Item {
 
 	@Override
 	public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn) {
-		if(!isTabIcon)setNBT(stack);
+		setNBT(stack);
 
 		super.onCreated(stack, worldIn, playerIn);
-	}
-
-	@Override
-	public boolean showDurabilityBar(ItemStack stack) {
-		if(stack.getTagCompound()==null){
-			setNBT(stack);
-		}
-		return !isTabIcon;
-	}
-
-	private float getDurability(NBTTagCompound tag){
-		return (int)(tag.getFloat("cur_pow")/tag.getFloat("max_pow")*POWER)/POWER;
-	}
-
-	@Override
-	public double getDurabilityForDisplay(ItemStack stack) {
-		if(stack.getTagCompound()==null){
-			setNBT(stack);
-		}
-		return 1-getDurability(stack.getTagCompound());
 	}
 
 	@Override
@@ -84,25 +119,9 @@ public class ItemIncantationsBook extends Item {
 	}
 
 	@Override
-	public int getRGBDurabilityForDisplay(ItemStack stack) {
-		if(stack.getTagCompound()==null){
-			setNBT(stack);
-		}
-		float dur=getDurability(stack.getTagCompound());
-		return MathHelper.hsvToRGB(0.5F, 1-dur/2, dur);
-	}
-
-	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-
-		if(!isTabIcon)super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
-
 		if(stack.getTagCompound()==null){
 			setNBT(stack);
-		}
-		if(stack.getTagCompound().getFloat("cur_pow")<=0){
-			entityIn.replaceItemInInventory(itemSlot,ItemStack.EMPTY);
-			return;
 		}
 
 		if(stack.getTagCompound().getInteger("cur_cd")>0){
@@ -114,8 +133,6 @@ public class ItemIncantationsBook extends Item {
 		if(stack.getTagCompound().getFloat("cur_pow")>stack.getTagCompound().getFloat("max_pow")){
 			stack.getTagCompound().setFloat("cur_pow",stack.getTagCompound().getFloat("max_pow"));
 		}
-
-		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
 	}
 
 	@Override
@@ -132,10 +149,13 @@ public class ItemIncantationsBook extends Item {
 			NBTTagCompound incs_tag=(NBTTagCompound)tag.getTag("incantations");
 			if(tag.getInteger("cur_inc")!=-1){
 
-
-				if(IncantationHandler.onClicked(playerIn,worldIn,(NBTTagCompound)incs_tag.getTag(""+tag.getInteger("cur_inc")))){
-					tag.setInteger("cur_cd",tag.getInteger("max_cd"));
-					tag.setFloat("cur_pow",tag.getFloat("cur_pow")-5);
+				float power = ((NBTTagCompound)incs_tag.getTag(""+tag.getInteger("cur_inc"))).getFloat("power");
+				if((tag.getFloat("cur_pow")-power>0 || RARITY == EnumRarity.COMMON) && IncantationHandler.onClicked(playerIn,worldIn,(NBTTagCompound)incs_tag.getTag(""+tag.getInteger("cur_inc")))){
+					tag.setInteger("cur_cd", (tag.getInteger("max_cd") + ((NBTTagCompound)incs_tag.getTag(""+tag.getInteger("cur_inc"))).getInteger("cd") ));
+					tag.setFloat("cur_pow",tag.getFloat("cur_pow") - power );
+					if(tag.getFloat("cur_pow")<0){
+						playerIn.setHeldItem(handIn,ItemStack.EMPTY);
+					}
 				}
 			}
 		}

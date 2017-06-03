@@ -1,25 +1,21 @@
-package ru.def.incantations.Commands;
+package ru.def.incantations.commands;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import ru.def.incantations.incantations.IncantationHandler;
-
-import javax.annotation.Nullable;
-import java.util.List;
+import ru.def.incantations.items.renders.RenderIncantationsBook;
 
 /**
  * Created by Defernus on 12.05.2017.
  */
-public class CommandExplStr extends CommandBase {
+public class CommandReloadMod extends CommandBase {
 
 	@Override
 	public String getName() {
-		return "expl";
+		return "inc_reload";
 	}
 
 	@Override
@@ -29,12 +25,9 @@ public class CommandExplStr extends CommandBase {
 
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-		if(args.length!=1){
-			sender.sendMessage(new TextComponentString("invalid sintaxis"));
-			return;
-		}
 
-		IncantationHandler.explosionStr=new Float(args[0]);
+		RenderIncantationsBook.reload();
+
 		sender.sendMessage(new TextComponentString("Succes"));
 	}
 }

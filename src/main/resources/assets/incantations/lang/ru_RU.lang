@@ -2,7 +2,20 @@
 itemGroup.my_tab=Заклинания
 
 #items
-item.incantations_book_ta.name=Книга заклинаний
+item.basic_book.name=Базовая книга заклинаний
+item.ancient_book.name=Древняя книга заклинаний
+item.legendary_book.name=Легендарная книга заклинаний
+item.mythical_book.name=Мифическая книга заклинаний
+
+item.rune.use.name=Руна использования
+item.rune.right_click.name=Активирующая руна
+item.rune.delay.name=Руна задержки
+item.rune.look_at.name=Руна зрения
+item.rune.explosion.name=Руна взрыва
+item.rune.projectile.name=Руна снаряда
+item.rune.fireball.name=Руна огненного шара
+item.rune.arrow.name=Руна стрелы
+
 
 #block
 tile.book_monument.name=Стойка для книги заклинаний

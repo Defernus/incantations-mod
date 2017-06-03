@@ -2,7 +2,23 @@
 itemGroup.my_tab=Incantations
 
 #items
-item.incantations_book_ta.name=Incantations book
+item.blank_scroll.name=Blank scroll
+item.written_scroll.name=Written scroll
+
+item.basic_book.name=Basic incantations book
+item.ancient_book.name=Ancient incantations book
+item.legendary_book.name=Legendary incantations book
+item.mythical_book.name=Mythical incantations book
+
+item.rune.use.name=Rune of use
+item.rune.right_click.name=Activating rune
+item.rune.delay.name=Detaining rune
+item.rune.look_at.name=Rune of looking
+item.rune.explosion.name=Rune of explosion
+item.rune.projectile.name=Rune of projectile
+item.rune.fireball.name=Rune of fireball
+item.rune.arrow.name=Rune of arrow
+
 
 #block
 tile.book_monument.name=Book monument

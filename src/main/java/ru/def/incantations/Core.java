@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import ru.def.incantations.events.EventRegister;
 import ru.def.incantations.proxy.CommonProxy;
 
 /**
@@ -40,6 +41,8 @@ public class Core
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
+		EventRegister.reg();
+
 		proxy.postInit(event);
 	}
 }

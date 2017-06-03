@@ -17,7 +17,7 @@ import ru.def.incantations.entity.TileEntityWritingTable;
 public class RenderWritingTable extends TileEntitySpecialRenderer<TileEntityWritingTable> {
 
 	private static final ResourceLocation TEXTURE_PAPER = new ResourceLocation("incantations:textures/entity/writing_table_paper.png");
-	private static final ResourceLocation TEXTURE_FONT = new ResourceLocation("textures/font/ascii_sga.png");
+	private static final ResourceLocation TEXTURE_FONT = new ResourceLocation("incantations:textures/entity/rune_chars.png");
 
 	@Override
 	public void renderTileEntityAt(TileEntityWritingTable te, double x, double y, double z, float partialTicks, int destroyStage) {
@@ -25,7 +25,11 @@ public class RenderWritingTable extends TileEntitySpecialRenderer<TileEntityWrit
 
 		if(te.hasPaper){
 			GlStateManager.pushMatrix();
+			GlStateManager.disableLighting();
 			{
+				float light = te.getWorld().getLight(te.getPos())/(float)15;
+				GlStateManager.color(light, light, light);
+
 				GlStateManager.translate(x,y+0.94,z);
 
 				Minecraft mc = Minecraft.getMinecraft();
@@ -35,6 +39,9 @@ public class RenderWritingTable extends TileEntitySpecialRenderer<TileEntityWrit
 				GlStateManager.enableBlend();
 				GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 				re.bindTexture(TEXTURE_PAPER);
+
+				GlStateManager.rotate(90,1,0,0);
+				GlStateManager.scale(1/32., 1/32., 1/32.);
 
 				if(te.getPos().getX()==te.posWN.getX()&&te.getPos().getZ()==te.posWN.getZ()) { //WN
 					drawPaper(0,re);
@@ -65,16 +72,20 @@ public class RenderWritingTable extends TileEntitySpecialRenderer<TileEntityWrit
 				}
 
 				re.bindTexture(TEXTURE_FONT);
-				GlStateManager.color(0F, 0F, 0F, .5f);
-				GlStateManager.scale(.5f, .5f, .5f);
-				GlStateManager.translate(5, 5, -0.1);
+				GlStateManager.color(0F, 0F, 0F, .5f+(1-light)/2);
+				GlStateManager.translate(16, 16, -0.1);
+
+				GlStateManager.rotate((te.facing+2)*90,0,0,1);
+
+				GlStateManager.translate(-11, -12, 0);
 
 				for(int i=0;i<4;i++){
-					int ch=(i*23+te.getPos().getX()+te.getPos().getY())%32;
+					int ch=te.chars[i];
 					drawChar(ch,i,re);
 				}
 
 			}
+			GlStateManager.enableLighting();
 			GlStateManager.popMatrix();
 		}
 	}
@@ -82,13 +93,8 @@ public class RenderWritingTable extends TileEntitySpecialRenderer<TileEntityWrit
 	private void drawPaper(int n, TextureManager re){
 		re.bindTexture(TEXTURE_PAPER);
 
-		int tx=16*(n%3),ty=16*(n/3);
-		int s=48;
-
-		GlStateManager.color(1F, 1F, 1F);
-
-		GlStateManager.rotate(90,1,0,0);
-		GlStateManager.scale(1/16., 1/16., 1/16.);
+		int s=96;
+		int tx=(s/3)*(n%3),ty=(s/3)*(n/3);
 
 		VertexBuffer wr = Tessellator.getInstance().getBuffer();
 		wr.begin(7, DefaultVertexFormats.POSITION_TEX);
@@ -100,16 +106,16 @@ public class RenderWritingTable extends TileEntitySpecialRenderer<TileEntityWrit
 	}
 
 	private void drawChar(int ch,int pos, TextureManager re){
-		int tx=(8*ch)%128,ty=32+(8*ch)/128;
+		int tx=(8*ch)%128,ty=8*((8*ch)/128);
 		int h=128,w=128;
 
 		GlStateManager.translate(16*(pos%2), 16*(pos/2), 0);
 
 		VertexBuffer wr = Tessellator.getInstance().getBuffer();
 		wr.begin(7, DefaultVertexFormats.POSITION_TEX);
-		wr.pos(0, 7, 0).tex(tx/(double)w, (ty+7)/(double)h).endVertex();
-		wr.pos(5, 7, 0).tex((tx+5)/(double)w, (ty+7)/(double)h).endVertex();
-		wr.pos(5, 0, 0).tex((tx+5)/(double)w, ty/(double)h).endVertex();
+		wr.pos(0, 8, 0).tex(tx/(double)w, (ty+8)/(double)h).endVertex();
+		wr.pos(8, 8, 0).tex((tx+8)/(double)w, (ty+8)/(double)h).endVertex();
+		wr.pos(8, 0, 0).tex((tx+8)/(double)w, ty/(double)h).endVertex();
 		wr.pos(0, 0, 0).tex(tx/(double)w, ty/(double)h).endVertex();
 		Tessellator.getInstance().draw();
 		GlStateManager.translate(-16*(pos%2), -16*(pos/2), 0);
