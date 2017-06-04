@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import ru.def.incantations.commands.CommandExplStr;
 import ru.def.incantations.blocks.BlocksRegister;
-import ru.def.incantations.commands.CommandReloadMod;
+import ru.def.incantations.commands.CommandSpawnIsland;
 import ru.def.incantations.entity.EntityRegister;
 import ru.def.incantations.items.ItemsRegister;
 import ru.def.incantations.net.PacketHandler;
@@ -19,7 +19,7 @@ public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
 		ClientCommandHandler.instance.registerCommand(new CommandExplStr());
-		ClientCommandHandler.instance.registerCommand(new CommandReloadMod());
+		ClientCommandHandler.instance.registerCommand(new CommandSpawnIsland());
 		ItemsRegister.registerItems();
 		BlocksRegister.registerBlocks();
 		EntityRegister.register();

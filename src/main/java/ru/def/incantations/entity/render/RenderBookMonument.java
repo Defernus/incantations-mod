@@ -5,6 +5,8 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import ru.def.incantations.entity.TileEntityBookMonument;
+import ru.def.incantations.items.ItemIncantationsBook;
+import ru.def.incantations.items.renders.RenderIncantationsBook;
 
 /**
  * Created by Defernus on 13.05.2017.
@@ -17,17 +19,26 @@ public class RenderBookMonument extends TileEntitySpecialRenderer<TileEntityBook
 
 		super.renderTileEntityAt(te,x,y,z,partialTicks,destroyStage);
 
-		EntityItem item=new EntityItem(te.getWorld(),0,0,0,te.inv.getStackInSlot(0));
+		//EntityItem item=new EntityItem(te.getWorld(),0,0,0,te.inv.getStackInSlot(0));
 
-		item.hoverStart=0;
+		//item.hoverStart=0;
 
 		GlStateManager.pushMatrix();
+		GlStateManager.disableLighting();
 		{
-			GlStateManager.translate(x+0.5,y+0.5,z+0.5);
+			GlStateManager.translate(x+0.5,y+.89,z+0.5);
+			GlStateManager.scale(.6, .6, .6);
 			GlStateManager.rotate(180-te.yaw,0,1,0);
 
-			Minecraft.getMinecraft().getRenderManager().doRenderEntity(item,0,0,0,0,0,false);
+			float light = te.getWorld().getLight(te.getPos())/(float)15;
+
+			if(te.inv.getStackInSlot(0).getItem() instanceof ItemIncantationsBook){
+				RenderIncantationsBook.renderBook(te.inv.getStackInSlot(0), light);
+			}
+
+			//Minecraft.getMinecraft().getRenderManager().doRenderEntity(item,0,0,0,0,0,false);
 		}
+		GlStateManager.enableLighting();
 		GlStateManager.popMatrix();
 	}
 

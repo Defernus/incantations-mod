@@ -32,4 +32,9 @@ public class CommandExplStr extends CommandBase {
 		IncantationHandler.explosionStr=new Float(args[0]);
 		sender.sendMessage(new TextComponentString("Succes"));
 	}
+
+	@Override
+	public int getRequiredPermissionLevel() {
+		return 4;
+	}
 }
