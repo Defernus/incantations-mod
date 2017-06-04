@@ -39,8 +39,6 @@ public class Core
 	}
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		EventRegister.reg();
-
 		proxy.postInit(event);
 	}
 }

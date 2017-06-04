@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import ru.def.incantations.Core;
 import ru.def.incantations.blocks.BlocksRegister;
 import ru.def.incantations.entity.EntityRegister;
+import ru.def.incantations.events.EventRegister;
 import ru.def.incantations.items.ItemRune;
 import ru.def.incantations.items.ItemsRegister;
 import ru.def.incantations.items.renders.RenderIncantationsBook;
@@ -45,6 +46,6 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {
-
+		EventRegister.regClient();
 	}
 }

@@ -1,13 +1,11 @@
 package ru.def.incantations.proxy;
 
-import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import ru.def.incantations.commands.CommandExplStr;
 import ru.def.incantations.blocks.BlocksRegister;
-import ru.def.incantations.commands.CommandSpawnIsland;
 import ru.def.incantations.entity.EntityRegister;
+import ru.def.incantations.events.EventRegister;
 import ru.def.incantations.items.ItemsRegister;
 import ru.def.incantations.net.PacketHandler;
 import ru.def.incantations.world.generator.GeneratorsRegister;
@@ -18,8 +16,8 @@ import ru.def.incantations.world.generator.GeneratorsRegister;
 public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
-		ClientCommandHandler.instance.registerCommand(new CommandExplStr());
-		ClientCommandHandler.instance.registerCommand(new CommandSpawnIsland());
+		/*ClientCommandHandler.instance.registerCommand(new CommandExplStr());
+		ClientCommandHandler.instance.registerCommand(new CommandSpawnIsland());*/
 		ItemsRegister.registerItems();
 		BlocksRegister.registerBlocks();
 		EntityRegister.register();
@@ -34,6 +32,6 @@ public class CommonProxy {
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
-
+		EventRegister.regCommon();
 	}
 }
