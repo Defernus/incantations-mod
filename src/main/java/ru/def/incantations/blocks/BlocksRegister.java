@@ -15,12 +15,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public class BlocksRegister {
 
-	public static BlockBookMonument BOOK_MONUMENT=new BlockBookMonument(Material.ROCK);
-	public static BlockWritingTable WRITING_TABLE=new BlockWritingTable(Material.ROCK);
+	public static BlockBookMonument BOOK_MONUMENT = new BlockBookMonument(Material.ROCK);
+	public static BlockWritingTable WRITING_TABLE = new BlockWritingTable(Material.ROCK);
+	public static BlockQuartzLamp QUARTZ_LAMP = new BlockQuartzLamp(Material.ROCK);
 
 	public static void registerBlocks() {
 		registerBlock(BOOK_MONUMENT);
 		registerBlock(WRITING_TABLE);
+		registerBlock(QUARTZ_LAMP);
 	}
 
 	private static void registerBlock(final Block block)
@@ -32,6 +34,7 @@ public class BlocksRegister {
 	public static void registerRenders() {
 		registerRender(BOOK_MONUMENT);
 		registerRender(WRITING_TABLE);
+		registerRender(QUARTZ_LAMP);
 	}
 
 	@SideOnly(Side.CLIENT)
