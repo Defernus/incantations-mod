@@ -29,8 +29,13 @@ public class IslandGenerator implements IWorldGenerator {
 			return;
 		}
 
-		if(canGenerateInChunk(chunkX, chunkZ, world )) {
-			generateNear(random, chunkX*16+8, level, chunkZ*16+8, world);
+		for(int i = -2; i <= 2; i++) {
+			for(int j = -2;j  <= 2; j++) {
+				if(canGenerateInChunk(chunkX+i, chunkZ+j, world )){
+					generateNear(chunkX+i,chunkZ+j, -i, -j,level,world);
+					return;
+				}
+			}
 		}
 	}
 
@@ -39,39 +44,33 @@ public class IslandGenerator implements IWorldGenerator {
 		int i = chunkX;
 		int j = chunkZ;
 
-		if (chunkX < 0)
-		{
+		if (chunkX < 0) {
 			i = chunkX - 9;
 		}
 
-		if (chunkZ < 0)
-		{
+		if (chunkZ < 0) {
 			j = chunkZ - 9;
 		}
 
 		i /= 10;
 		j /= 10;
-		Random random = new Random((long)chunkX * 341873128712L + (long)chunkZ * 132897987541L + world.getWorldInfo().getSeed() + (long)27644437);
 		i *= 10;
 		j *= 10;
+		Random random = new Random((long)i * 341873128712L + (long)j * 132897987541L + world.getWorldInfo().getSeed() + (long)27644437);
 		i += random.nextInt(7);
 		j += random.nextInt(7);
 
-		if(i != chunkX || j != chunkZ) {
-			return false;
-		}
-
-		if( true){//world.getBiomeProvider().areBiomesViable(chunkX*16+8, chunkZ*16+8, 16, ALLOWED_BIOMES) ) {
+		if( i == chunkX && j == chunkZ ){//&& world.getBiomeProvider().areBiomesViable(chunkX*16+8, chunkZ*16+8, 16, ALLOWED_BIOMES) ) {
 			return true;
 		}
 
 		return false;
 	}
 
-	private static void generateNear(Random random, int x, int y, int z, World world) {
+	private static void generateNear(int chunkX, int chunkZ, int scX, int scZ, int y, World world) {
 
-		System.out.println("Generating dungeon at "+x+"_"+y+"_"+z);
-		generateIsland(x, y, z, world);
+		System.out.println("Generating island at "+chunkX+"_"+chunkZ);
+		generateIsland(chunkX, chunkZ, scX, scZ, y, world);
 
 		/*
 		for(int i = 1; i < 255; i++) {
@@ -88,21 +87,71 @@ public class IslandGenerator implements IWorldGenerator {
 		*/
 	}
 
-	public static void generateIsland( int x, int y, int z, World world) {
+	public static void generateIsland(int chunkX, int chunkZ, int scX, int scZ, int y, World world) {
+		int x = chunkX*16+8;
+		int z = chunkZ*16+8;
+
 		Random rnd = new Random((long)x * 341873128712L + (long)z * 132897987541L + world.getWorldInfo().getSeed() + (long)27644437);
 
 		int d = 24+rnd.nextInt(32), h = d;
+
+		NoiseGeneratorPerlin perlin = new NoiseGeneratorPerlin(rnd, 2);
+
+		int imax, imin, kmax, kmin;
+
+		imin = scX*16;
+		imax = (scX+1)*16;
+		kmin = scZ*16;
+		kmax = (scZ+1)*16;
+
+		int c = 0;
+
+		for(int i = imin; i < imax; i++) {
+			for(int k = kmin; k < kmax; k++) {
+				int gh = (int)perlin.getValue(i/3.,k/3.)+4;
+				double tp = perlin.getValue((x+i)/35., (z+k)/35.);
+				int tH = (int)( tp+h*(1.-(i*i+k*k)/(d*d/4.))/10. );
+				int bH = (int)( perlin.getValue((x+i)+100., (z+k)+100.)/2. - (d*d)/(i*i+k*k+d) );
+
+				//System.out.println("dH at "+i+"_"+k+" = "+((d/2+2)*(d/2+2)-((i+2)*(i+2)+(k+2)*(k+2)))/h);
+				if(i*i+k*k > (d/2)*(d/2)+tH) {
+					continue;
+				}
+				for(int j = bH; j < tH; j++) {
+
+
+
+					BlockPos pos = new BlockPos(x+i,y+j,z+k);
+
+					IBlockState block;
+					if(j == tH-1) {
+						block = Blocks.GRASS.getDefaultState();
+					}else if(j > tH-gh) {
+						block = Blocks.DIRT.getDefaultState();
+					}else {
+						block = Blocks.STONE.getDefaultState();
+					}
+
+					world.setBlockState( pos, block );
+					c++;
+				}
+			}
+		}
+		System.out.println("Generated "+c+" blocks");
+
+		//old gen
+		/*
 
 		int blocks[][] = new int[d][d];
 		for(int i = 0; i < d*d; i++) {
 			blocks[i/d][i%d] = 0;
 		}
 
-		NoiseGeneratorPerlin perlin = new NoiseGeneratorPerlin(rnd, 3);
+		NoiseGeneratorPerlin perlin = new NoiseGeneratorPerlin(rnd, 2);
 
 		for(int i = -d/2; i < d/2; i++) {
 			for(int k = -d/2; k < d/2; k++) {
-				int ih = (int)perlin.getValue((x+i)/20f, (z+k)/20f)*7;
+				int ih = (int)perlin.getValue((x+i)/50f, (z+k)/50f)*10;
 				for(int j = -h/2; j < h/2; j++) {
 					if( (i*i+k*k)-ih < (d*d/4-9) && (j < 3-h/2 || rnd.nextInt( ((i*i+k*k+j*j)/d)*500+h*h/4 ) < h*h/4) ) {
 						blocks[i+d/2][k+d/2]+=1;
@@ -113,15 +162,16 @@ public class IslandGenerator implements IWorldGenerator {
 
 		for(int i = -d/2; i < d/2; i++) {
 			for(int k = -d/2; k < d/2; k++) {
-				int gh = (int)perlin.getValue(i/3,k/3)+4;
-				int ih = (int)perlin.getValue((x+i)/15f, (z+k)/15f);
-				for(int j = h/2-blocks[i+d/2][k+d/2]; j < h/2; j++) {
+				int gh = (int)perlin.getValue(i/7,k/7)+4;
+				int ih = (int)perlin.getValue((x+i)/35f, (z+k)/35f);
+				int l = (int)( h*(1-(i*i+k*k)/(float)(d*d/4))/10 );
+				for(int j = h/2-blocks[i+d/2][k+d/2]; j < h/2+l; j++) {
 					BlockPos pos = new BlockPos(x+i,y+j-h/2-2+ih,z+k);
 
 					IBlockState block;
-					if(j == h/2-1) {
+					if(j == h/2-1+l) {
 						block = Blocks.GRASS.getDefaultState();
-					}else if(j < h/2-1 && j > h/2-gh) {
+					}else if(j > h/2-gh+l) {
 						block = Blocks.DIRT.getDefaultState();
 					}else {
 						block = Blocks.STONE.getDefaultState();
@@ -131,6 +181,7 @@ public class IslandGenerator implements IWorldGenerator {
 				}
 			}
 		}
+		 */
 
 	}
 }

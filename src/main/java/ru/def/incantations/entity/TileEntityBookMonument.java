@@ -1,13 +1,11 @@
 package ru.def.incantations.entity;
 
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 
@@ -17,10 +15,10 @@ import net.minecraft.world.World;
 public class TileEntityBookMonument extends TileEntity {
 
 	public float yaw=0;
-	public InventoryBasic inv=new InventoryBasic(new TextComponentString("Book monument"),1);
+	public ItemStack stack = ItemStack.EMPTY;
 
 	public void setStack(World world, BlockPos pos, ItemStack stack,float yaw){
-		this.inv.setInventorySlotContents(0,stack);
+		this.stack = stack;
 		this.yaw=yaw;
 
 		this.markDirty();
@@ -51,7 +49,7 @@ public class TileEntityBookMonument extends TileEntity {
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 
-		inv.setInventorySlotContents(0,new ItemStack((NBTTagCompound)tag.getTag("item")));
+		this.stack = new ItemStack((NBTTagCompound)tag.getTag("item"));
 		yaw=tag.getFloat("yaw");
 	}
 
@@ -62,7 +60,7 @@ public class TileEntityBookMonument extends TileEntity {
 		super.writeToNBT(tag);
 
 		NBTTagCompound s_tag = new NBTTagCompound();
-		inv.getStackInSlot(0).writeToNBT(s_tag);
+		this.stack.writeToNBT(s_tag);
 		tag.setTag("item", s_tag);
 
 		tag.setFloat("yaw",yaw);

@@ -32,8 +32,8 @@ public class RenderBookMonument extends TileEntitySpecialRenderer<TileEntityBook
 
 			float light = te.getWorld().getLight(te.getPos())/(float)15;
 
-			if(te.inv.getStackInSlot(0).getItem() instanceof ItemIncantationsBook){
-				RenderIncantationsBook.renderBook(te.inv.getStackInSlot(0), light);
+			if(te.stack.getItem() instanceof ItemIncantationsBook){
+				RenderIncantationsBook.renderBook(te.stack, light);
 			}
 
 			//Minecraft.getMinecraft().getRenderManager().doRenderEntity(item,0,0,0,0,0,false);

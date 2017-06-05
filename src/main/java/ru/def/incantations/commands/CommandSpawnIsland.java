@@ -29,7 +29,7 @@ public class CommandSpawnIsland extends CommandBase {
 			return;
 		}*/
 
-		IslandGenerator.generateIsland(sender.getPosition().getX(), sender.getPosition().getY(), sender.getPosition().getZ(), sender.getEntityWorld());
+		//IslandGenerator.generateIsland(sender.getPosition().getX(), sender.getPosition().getY(), sender.getPosition().getZ(), sender.getEntityWorld());
 
 		sender.sendMessage(new TextComponentString("Succes"));
 	}

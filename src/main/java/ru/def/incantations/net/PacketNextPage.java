@@ -36,9 +36,6 @@ public class PacketNextPage implements IMessage {
 	}
 
 	public PacketNextPage() {
-		// Calculate the position of the block we are looking at
-		RayTraceResult mouseOver = Minecraft.getMinecraft().objectMouseOver;
-		blockPos = mouseOver.getBlockPos();
 	}
 
 	public static class Handler implements IMessageHandler<PacketNextPage, IMessage> {

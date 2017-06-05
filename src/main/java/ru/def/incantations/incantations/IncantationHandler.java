@@ -2,6 +2,7 @@ package ru.def.incantations.incantations;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemArrow;
@@ -46,9 +47,16 @@ public class IncantationHandler {
 
 	private static boolean spawnLookAt(EntityPlayer player, World worldIn, NBTTagCompound tag){
 		if(tag.getInteger("id") == ItemRune.EnumRune.EXPLOSION.getID()) {
-			RayTraceResult result = player.rayTrace(40f,0.2f);
 
-			if(!worldIn.isAirBlock(result.getBlockPos())){
+			Vec3d pos = player.getPositionEyes(1);
+			Vec3d look = player.getLook(1);
+
+
+			RayTraceResult result = worldIn.rayTraceBlocks(pos, new Vec3d(look.xCoord*50, look.yCoord*50, look.zCoord*50).add(pos), false, true, false);
+
+			System.out.println(look.xCoord+"_"+look.yCoord+"_"+look.zCoord);
+
+			if(result!=null&&!worldIn.isAirBlock(result.getBlockPos())){
 				Vec3d v = result.hitVec;
 				worldIn.newExplosion(player, v.xCoord, v.yCoord, v.zCoord, explosionStr, false, true);
 
@@ -74,7 +82,9 @@ public class IncantationHandler {
 
 			System.out.println("player pos: (" + px + "; " + py + "; " + pz + "; look: (" + lx + "; " + ly + "; " + lz + ")");
 
-			worldIn.spawnEntity(new EntityLargeFireball(worldIn, px, py, pz, lx, ly, lz));
+			EntityFireball fireball;
+
+			worldIn.spawnEntity(new EntityLargeFireball(worldIn, player, lx*100, ly*100, lz*100));
 
 			return true;
 		} else if (tag.getInteger("id")==ItemRune.EnumRune.ARROW.getID()) {

@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -16,6 +17,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -47,7 +49,7 @@ public class BlockBookMonument extends Block implements ITileEntityProvider {
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 		if(worldIn.getTileEntity(pos) instanceof TileEntityBookMonument){
-			worldIn.spawnEntity(new EntityItem(worldIn,pos.getX()+0.5f,pos.getY()+0.5f,pos.getZ()+0.5f,(((TileEntityBookMonument)worldIn.getTileEntity(pos)).inv.getStackInSlot(0))));
+			worldIn.spawnEntity(new EntityItem(worldIn,pos.getX()+0.5f,pos.getY()+0.5f,pos.getZ()+0.5f,(((TileEntityBookMonument)worldIn.getTileEntity(pos)).stack)));
 		}
 		worldIn.markTileEntityForRemoval(worldIn.getTileEntity(pos));
 
@@ -56,27 +58,32 @@ public class BlockBookMonument extends Block implements ITileEntityProvider {
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		System.out.println("actived");
 
 		if(!world.isRemote)
 		{
 			TileEntity entity = world.getTileEntity(pos);
 			if(entity instanceof TileEntityBookMonument)
 			{
-				if(((TileEntityBookMonument)entity).inv.getStackInSlot(0).isEmpty() && (player.getHeldItem(hand).getItem() instanceof ItemIncantationsBook)){
+				if(((TileEntityBookMonument)entity).stack.isEmpty() && (player.getHeldItem(hand).getItem() instanceof ItemIncantationsBook)){
 
-					((TileEntityBookMonument)entity).setStack(world,pos,player.getHeldItem(hand),player.getPitchYaw().y);
+					double x = player.getLook(1).xCoord;
+					double z = player.getLook(1).zCoord;
+					float pitch = (float)(MathHelper.atan2(z,x)/Math.PI*180)-90;//player.getHorizontalFacing().getHorizontalAngle();
+
+					((TileEntityBookMonument)entity).setStack(world,pos,player.getHeldItem(hand),pitch);
 					player.setHeldItem(hand,ItemStack.EMPTY);
 					return true;
 
-				}else if( !((TileEntityBookMonument)entity).inv.getStackInSlot(0).isEmpty() && ((TileEntityBookMonument)entity).inv.getStackInSlot(0).getItem() instanceof ItemIncantationsBook && (player.getHeldItem(hand).isEmpty()) ){
+				}else if( !((TileEntityBookMonument)entity).stack.isEmpty() && ((TileEntityBookMonument)entity).stack.getItem() instanceof ItemIncantationsBook && (player.getHeldItem(hand).isEmpty()) ){
 
-					player.setHeldItem(hand,((TileEntityBookMonument)entity).inv.getStackInSlot(0));
-					((TileEntityBookMonument)entity).setStack(world,pos,ItemStack.EMPTY,player.getPitchYaw().y);
+					player.setHeldItem(hand,((TileEntityBookMonument)entity).stack);
+					((TileEntityBookMonument)entity).setStack(world, pos, ItemStack.EMPTY, player.getHorizontalFacing().getHorizontalAngle());
 					return true;
 
-				}else if(!((TileEntityBookMonument)entity).inv.getStackInSlot(0).isEmpty() && player.getHeldItem(hand).getItem() == ItemsRegister.WRITTEN_SCROLL){
+				}else if(!((TileEntityBookMonument)entity).stack.isEmpty() && player.getHeldItem(hand).getItem() == ItemsRegister.WRITTEN_SCROLL){
 
-					NBTTagCompound tag = ((TileEntityBookMonument)entity).inv.getStackInSlot(0).getTagCompound();
+					NBTTagCompound tag = ((TileEntityBookMonument)entity).stack.getTagCompound();
 					int max_inc = tag.getInteger("max_inc");
 
 					NBTTagCompound tag_inc = tag.getCompoundTag("incantations");
