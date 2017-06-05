@@ -29,8 +29,8 @@ public class IslandGenerator implements IWorldGenerator {
 			return;
 		}
 
-		for(int i = -2; i <= 2; i++) {
-			for(int j = -2;j  <= 2; j++) {
+		for(int i = -3; i <= 3; i++) {
+			for(int j = -3;j  <= 3; j++) {
 				if(canGenerateInChunk(chunkX+i, chunkZ+j, world )){
 					generateNear(chunkX+i,chunkZ+j, -i, -j,level,world);
 					return;
@@ -45,20 +45,20 @@ public class IslandGenerator implements IWorldGenerator {
 		int j = chunkZ;
 
 		if (chunkX < 0) {
-			i = chunkX - 9;
+			i = chunkX - 19;
 		}
 
 		if (chunkZ < 0) {
-			j = chunkZ - 9;
+			j = chunkZ - 19;
 		}
 
-		i /= 10;
-		j /= 10;
-		i *= 10;
-		j *= 10;
+		i /= 20;
+		j /= 20;
+		i *= 20;
+		j *= 20;
 		Random random = new Random((long)i * 341873128712L + (long)j * 132897987541L + world.getWorldInfo().getSeed() + (long)27644437);
-		i += random.nextInt(7);
-		j += random.nextInt(7);
+		i += random.nextInt(12);
+		j += random.nextInt(12);
 
 		if( i == chunkX && j == chunkZ ){//&& world.getBiomeProvider().areBiomesViable(chunkX*16+8, chunkZ*16+8, 16, ALLOWED_BIOMES) ) {
 			return true;
@@ -93,16 +93,17 @@ public class IslandGenerator implements IWorldGenerator {
 
 		Random rnd = new Random((long)x * 341873128712L + (long)z * 132897987541L + world.getWorldInfo().getSeed() + (long)27644437);
 
-		int d = 24+rnd.nextInt(32), h = d;
+		int d = 24+rnd.nextInt(86);
+		int h = d;
 
 		NoiseGeneratorPerlin perlin = new NoiseGeneratorPerlin(rnd, 2);
 
 		int imax, imin, kmax, kmin;
 
-		imin = scX*16;
-		imax = (scX+1)*16;
-		kmin = scZ*16;
-		kmax = (scZ+1)*16;
+		imin = scX*16-8;
+		imax = (scX+1)*16-8;
+		kmin = scZ*16-8;
+		kmax = (scZ+1)*16-8;
 
 		int c = 0;
 
@@ -111,10 +112,10 @@ public class IslandGenerator implements IWorldGenerator {
 				int gh = (int)perlin.getValue(i/3.,k/3.)+4;
 				double tp = perlin.getValue((x+i)/35., (z+k)/35.);
 				int tH = (int)( tp+h*(1.-(i*i+k*k)/(d*d/4.))/10. );
-				int bH = (int)( perlin.getValue((x+i)+100., (z+k)+100.)/2. - (d*d)/(i*i+k*k+d) );
+				int bH = (int)( perlin.getValue((x+i)+100., (z+k)+100.) + perlin.getValue((x+i)/50., (z+k)/50.)*10 - ((d/2)-Math.sqrt(i*i+k*k)) - 4);//(d*d)/(i*i+k*k+d) );
 
 				//System.out.println("dH at "+i+"_"+k+" = "+((d/2+2)*(d/2+2)-((i+2)*(i+2)+(k+2)*(k+2)))/h);
-				if(i*i+k*k > (d/2)*(d/2)+tH) {
+				if(i*i+k*k > (d/2)*(d/2)+tH && i*i+k*k < bH) {
 					continue;
 				}
 				for(int j = bH; j < tH; j++) {

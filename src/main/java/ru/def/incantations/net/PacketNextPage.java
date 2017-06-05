@@ -21,18 +21,14 @@ import ru.def.incantations.items.ItemIncantationsBook;
  * Created by Defernus on 03.06.2017.
  */
 public class PacketNextPage implements IMessage {
-	private BlockPos blockPos;
-
 	@Override
 	public void fromBytes(ByteBuf buf) {
-		blockPos = new BlockPos(buf.readInt(), buf.readInt(), buf.readInt());
+
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf) {
-		buf.writeInt(blockPos.getX());
-		buf.writeInt(blockPos.getY());
-		buf.writeInt(blockPos.getZ());
+
 	}
 
 	public PacketNextPage() {
