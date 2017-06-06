@@ -1,11 +1,11 @@
-package ru.def.incantations.entity;
+package ru.def.incantations.tileentity;
 
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import ru.def.incantations.entity.render.RenderBookMonument;
-import ru.def.incantations.entity.render.RenderWritingTable;
+import ru.def.incantations.tileentity.render.RenderBookMonument;
+import ru.def.incantations.tileentity.render.RenderWritingTable;
 
 /**
  * Created by Defernus on 12.05.2017.

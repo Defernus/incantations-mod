@@ -1,4 +1,4 @@
-package ru.def.incantations.entity;
+package ru.def.incantations.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;

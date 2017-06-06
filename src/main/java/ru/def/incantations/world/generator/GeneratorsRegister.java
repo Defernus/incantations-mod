@@ -7,9 +7,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  */
 public class GeneratorsRegister {
 
-	public static IslandGenerator DUNGEON = new IslandGenerator();
+	public static IslandGenerator ISLAND = new IslandGenerator();
 
 	public static void register() {
-		GameRegistry.registerWorldGenerator(DUNGEON, 0);
+		GameRegistry.registerWorldGenerator(ISLAND, 100);
 	}
 }

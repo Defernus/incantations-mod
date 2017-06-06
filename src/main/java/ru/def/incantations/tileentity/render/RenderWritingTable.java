@@ -1,4 +1,4 @@
-package ru.def.incantations.entity.render;
+package ru.def.incantations.tileentity.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -9,15 +9,15 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-import ru.def.incantations.entity.TileEntityWritingTable;
+import ru.def.incantations.tileentity.TileEntityWritingTable;
 
 /**
  * Created by Defernus on 14.05.2017.
  */
 public class RenderWritingTable extends TileEntitySpecialRenderer<TileEntityWritingTable> {
 
-	private static final ResourceLocation TEXTURE_PAPER = new ResourceLocation("incantations:textures/entity/writing_table_paper.png");
-	private static final ResourceLocation TEXTURE_FONT = new ResourceLocation("incantations:textures/entity/rune_chars.png");
+	private static final ResourceLocation TEXTURE_PAPER = new ResourceLocation("incantations:textures/tileentity/writing_table_paper.png");
+	private static final ResourceLocation TEXTURE_FONT = new ResourceLocation("incantations:textures/tileentity/rune_chars.png");
 
 	@Override
 	public void renderTileEntityAt(TileEntityWritingTable te, double x, double y, double z, float partialTicks, int destroyStage) {

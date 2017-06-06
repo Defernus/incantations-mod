@@ -3,7 +3,6 @@ package ru.def.incantations.events;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import ru.def.incantations.gui.GuiBook;
 import ru.def.incantations.items.renders.RenderIncantationsBook;
 import ru.def.incantations.keybinds.KeyBinder;
 

@@ -4,7 +4,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import ru.def.incantations.blocks.BlocksRegister;
-import ru.def.incantations.entity.EntityRegister;
+import ru.def.incantations.tileentity.EntityRegister;
 import ru.def.incantations.events.EventRegister;
 import ru.def.incantations.items.ItemsRegister;
 import ru.def.incantations.net.PacketHandler;

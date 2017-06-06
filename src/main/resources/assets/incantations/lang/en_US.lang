@@ -9,8 +9,7 @@ item.basic_book.name=Basic incantations book
 item.ancient_book.name=Ancient incantations book
 item.legendary_book.name=Legendary incantations book
 item.mythical_book.name=Mythical incantations book
-item.scroll_blank.name=Blank scroll
-item.scroll_written.name=Written scroll
+item.sky_iron_ingot.name=Sky iron ingot
 
 item.rune.use.name=Rune of use
 item.rune.right_click.name=Activating rune
@@ -25,3 +24,4 @@ item.rune.arrow.name=Rune of arrow
 #block
 tile.book_monument.name=Book monument
 tile.writing_table.name=Writing table
+tile.quartz_lamp.name=Quartz lamp

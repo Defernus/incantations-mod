@@ -1,10 +1,8 @@
-package ru.def.incantations.entity.render;
+package ru.def.incantations.tileentity.render;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.item.EntityItem;
-import ru.def.incantations.entity.TileEntityBookMonument;
+import ru.def.incantations.tileentity.TileEntityBookMonument;
 import ru.def.incantations.items.ItemIncantationsBook;
 import ru.def.incantations.items.renders.RenderIncantationsBook;
 

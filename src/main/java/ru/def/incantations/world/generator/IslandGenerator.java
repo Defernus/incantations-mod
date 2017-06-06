@@ -10,6 +10,7 @@ import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraftforge.fml.common.IWorldGenerator;
+import ru.def.incantations.blocks.BlocksRegister;
 
 import java.util.Arrays;
 import java.util.List;
@@ -56,6 +57,7 @@ public class IslandGenerator implements IWorldGenerator {
 		j /= 20;
 		i *= 20;
 		j *= 20;
+
 		Random random = new Random((long)i * 341873128712L + (long)j * 132897987541L + world.getWorldInfo().getSeed() + (long)27644437);
 		i += random.nextInt(12);
 		j += random.nextInt(12);
@@ -69,7 +71,7 @@ public class IslandGenerator implements IWorldGenerator {
 
 	private static void generateNear(int chunkX, int chunkZ, int scX, int scZ, int y, World world) {
 
-		System.out.println("Generating island at "+chunkX+"_"+chunkZ);
+		System.out.println("Generating island at "+(chunkX+scX)+"_"+(chunkZ+scZ) + "("+chunkX+"_"+chunkZ+")");
 		generateIsland(chunkX, chunkZ, scX, scZ, y, world);
 
 		/*
@@ -112,7 +114,8 @@ public class IslandGenerator implements IWorldGenerator {
 				int gh = (int)perlin.getValue(i/3.,k/3.)+4;
 				double tp = perlin.getValue((x+i)/35., (z+k)/35.);
 				int tH = (int)( tp+h*(1.-(i*i+k*k)/(d*d/4.))/10. );
-				int bH = (int)( perlin.getValue((x+i)+100., (z+k)+100.) + perlin.getValue((x+i)/50., (z+k)/50.)*10 - ((d/2)-Math.sqrt(i*i+k*k)) - 4);//(d*d)/(i*i+k*k+d) );
+				double l = Math.sqrt(i*i+k*k);
+				int bH = (int)( perlin.getValue((x+i)+100., (z+k)+100.)*(d/2-l)/10. + perlin.getValue((x+i)/50., (z+k)/50.)*((d/2-l)/5.+7) - ((d/2)-l) - 4);//(d*d)/(i*i+k*k+d) );
 
 				//System.out.println("dH at "+i+"_"+k+" = "+((d/2+2)*(d/2+2)-((i+2)*(i+2)+(k+2)*(k+2)))/h);
 				if(i*i+k*k > (d/2)*(d/2)+tH && i*i+k*k < bH) {
@@ -130,7 +133,11 @@ public class IslandGenerator implements IWorldGenerator {
 					}else if(j > tH-gh) {
 						block = Blocks.DIRT.getDefaultState();
 					}else {
-						block = Blocks.STONE.getDefaultState();
+						if(rnd.nextInt(100+d/2-(int)l) == 0) {
+							block = BlocksRegister.SKY_IRON_ORE.getDefaultState();
+						}else {
+							block = Blocks.STONE.getDefaultState();
+						}
 					}
 
 					world.setBlockState( pos, block );

@@ -2,12 +2,14 @@
 itemGroup.my_tab=Заклинания
 
 #items
+item.scroll_blank.name=Пустой свиток
+item.scroll_written.name=Свиток с заклинанием
+
 item.basic_book.name=Базовая книга заклинаний
 item.ancient_book.name=Древняя книга заклинаний
 item.legendary_book.name=Легендарная книга заклинаний
 item.mythical_book.name=Мифическая книга заклинаний
-item.scroll_blank.name=Пустой свиток
-item.scroll_written.name=Свиток с заклинанием
+item.sky_iron_ingot.name=Слиток небесного железа
 
 item.rune.use.name=Руна использования
 item.rune.right_click.name=Активирующая руна
@@ -22,3 +24,4 @@ item.rune.arrow.name=Руна стрелы
 #block
 tile.book_monument.name=Стойка для книги заклинаний
 tile.writing_table.name=Письменый стол
+tile.quartz_lamp.name=Кварцевая лампа

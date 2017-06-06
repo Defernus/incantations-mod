@@ -22,6 +22,8 @@ public class ItemsRegister {
 	public static ItemRune RUNE=new ItemRune();
 	public static ItemWrittenScroll WRITTEN_SCROLL=new ItemWrittenScroll();
 	public static Item BLANK_SCROLL=(new Item()).setUnlocalizedName("scroll_blank").setRegistryName("scroll_blank").setCreativeTab(CreativeTabsHandler.MY_TAB);
+	public static ItemSkyIronIngot SKY_IRON_INGOT=new ItemSkyIronIngot();
+	public static ItemSkyIronOre SKY_IRON_ORE=new ItemSkyIronOre();
 
 	public static void registerItems() {
 		GameRegistry.register(BASIC_BOOK);
@@ -32,6 +34,8 @@ public class ItemsRegister {
 		GameRegistry.register(RUNE);
 		GameRegistry.register(WRITTEN_SCROLL);
 		GameRegistry.register(BLANK_SCROLL);
+		GameRegistry.register(SKY_IRON_INGOT);
+		GameRegistry.register(SKY_IRON_ORE);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -40,6 +44,7 @@ public class ItemsRegister {
 		registerRender(ANCIENT_BOOK);
 		registerRender(LEGENDARY_BOOK);
 		registerRender(MYTHICAL_BOOK);
+
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(INCANTATIONS_BOOK_TAB,0, new ModelResourceLocation(BASIC_BOOK.getRegistryName(),"inventory"));
 
 		for(int i = 0; i < ItemRune.EnumRune.values().length; i++) {
@@ -48,6 +53,8 @@ public class ItemsRegister {
 
 		registerRender(WRITTEN_SCROLL);
 		registerRender(BLANK_SCROLL);
+		registerRender(SKY_IRON_INGOT);
+		registerRender(SKY_IRON_ORE);
 	}
 
 	public static void registerRender(Item item) {

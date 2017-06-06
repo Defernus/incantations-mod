@@ -17,7 +17,7 @@ import ru.def.incantations.items.ItemIncantationsBook;
  */
 public class RenderIncantationsBook {
 	private static ResourceLocation TEX_BOOK = new ResourceLocation("incantations:textures/gui/book_inhand.png");
-	private static ResourceLocation TEX_CHARS = new ResourceLocation("incantations:textures/entity/rune_chars.png");
+	private static ResourceLocation TEX_CHARS = new ResourceLocation("incantations:textures/tileentity/rune_chars.png");
 
 	private static final int book_w = 16, book_h = 16, power_w = 24, power_h = 7, tex_size = 32;
 

@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import ru.def.incantations.entity.TileEntityWritingTable;
+import ru.def.incantations.tileentity.TileEntityWritingTable;
 import ru.def.incantations.items.ItemRune;
 
 import java.util.Objects;

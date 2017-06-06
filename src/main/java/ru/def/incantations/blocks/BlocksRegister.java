@@ -18,11 +18,13 @@ public class BlocksRegister {
 	public static BlockBookMonument BOOK_MONUMENT = new BlockBookMonument(Material.ROCK);
 	public static BlockWritingTable WRITING_TABLE = new BlockWritingTable(Material.ROCK);
 	public static BlockQuartzLamp QUARTZ_LAMP = new BlockQuartzLamp(Material.ROCK);
+	public static BlockSkyIronOre SKY_IRON_ORE = new BlockSkyIronOre(Material.ROCK);
 
 	public static void registerBlocks() {
 		registerBlock(BOOK_MONUMENT);
 		registerBlock(WRITING_TABLE);
 		registerBlock(QUARTZ_LAMP);
+		GameRegistry.register(SKY_IRON_ORE);
 	}
 
 	private static void registerBlock(final Block block)
@@ -35,6 +37,7 @@ public class BlocksRegister {
 		registerRender(BOOK_MONUMENT);
 		registerRender(WRITING_TABLE);
 		registerRender(QUARTZ_LAMP);
+		registerRender(SKY_IRON_ORE);
 	}
 
 	@SideOnly(Side.CLIENT)
