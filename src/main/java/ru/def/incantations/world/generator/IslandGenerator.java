@@ -133,7 +133,7 @@ public class IslandGenerator implements IWorldGenerator {
 					}else if(j > tH-gh) {
 						block = Blocks.DIRT.getDefaultState();
 					}else {
-						if(rnd.nextInt(100+d/2-(int)l) == 0) {
+						if(rnd.nextInt( i*i+j*j+k*k+1 ) == 0) {
 							block = BlocksRegister.SKY_IRON_ORE.getDefaultState();
 						}else {
 							block = Blocks.STONE.getDefaultState();
