@@ -16,8 +16,8 @@ import java.util.Random;
  * Created by Defernus on 06.06.2017.
  */
 public class BlockSkyIronOre extends Block {
-	public BlockSkyIronOre(Material mat) {
-		super(mat);
+	public BlockSkyIronOre() {
+		super(Material.ROCK);
 
 		this.setRegistryName("sky_iron_ore");
 		this.setUnlocalizedName("sky_iron_ore");

@@ -32,8 +32,8 @@ public class BlockBookMonument extends Block implements ITileEntityProvider {
 
 	protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.875D, 0.875D);
 
-	public BlockBookMonument(Material materialIn) {
-		super(materialIn);
+	public BlockBookMonument() {
+		super(Material.ROCK);
 
 		this.setUnlocalizedName("book_monument");
 		this.setRegistryName( "book_monument");
@@ -55,8 +55,6 @@ public class BlockBookMonument extends Block implements ITileEntityProvider {
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		System.out.println("actived");
-
 		if(!world.isRemote)
 		{
 			TileEntity entity = world.getTileEntity(pos);
@@ -66,9 +64,9 @@ public class BlockBookMonument extends Block implements ITileEntityProvider {
 
 					double x = player.getLook(1).xCoord;
 					double z = player.getLook(1).zCoord;
-					float pitch = (float)(MathHelper.atan2(z,x)/Math.PI*180)-90;//player.getHorizontalFacing().getHorizontalAngle();
+					float yaw = (float)(MathHelper.atan2(z,x)/Math.PI*180)-90;//player.getHorizontalFacing().getHorizontalAngle();
 
-					((TileEntityBookMonument)entity).setStack(world,pos,player.getHeldItem(hand),pitch);
+					((TileEntityBookMonument)entity).setStack(world,pos,player.getHeldItem(hand),yaw);
 					player.setHeldItem(hand,ItemStack.EMPTY);
 					return true;
 
@@ -78,7 +76,7 @@ public class BlockBookMonument extends Block implements ITileEntityProvider {
 					((TileEntityBookMonument)entity).setStack(world, pos, ItemStack.EMPTY, player.getHorizontalFacing().getHorizontalAngle());
 					return true;
 
-				}else if(!((TileEntityBookMonument)entity).stack.isEmpty() && player.getHeldItem(hand).getItem() == ItemsRegister.WRITTEN_SCROLL){
+				}else if(!((TileEntityBookMonument)entity).stack.isEmpty() && player.getHeldItem(hand).getItem() == ItemsRegister.WRITTEN_SCROLL_CHARGED){
 
 					NBTTagCompound tag = ((TileEntityBookMonument)entity).stack.getTagCompound();
 					int max_inc = tag.getInteger("max_inc");

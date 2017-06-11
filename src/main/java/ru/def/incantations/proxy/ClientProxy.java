@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import ru.def.incantations.Core;
 import ru.def.incantations.blocks.BlocksRegister;
-import ru.def.incantations.tileentity.EntityRegister;
+import ru.def.incantations.tileentity.TileEntityRegister;
 import ru.def.incantations.events.EventRegister;
 import ru.def.incantations.items.ItemRune;
 import ru.def.incantations.items.ItemsRegister;
@@ -27,7 +27,7 @@ public class ClientProxy extends CommonProxy {
 		ItemsRegister.registerRenders();
 		BlocksRegister.registerRenders();
 
-		EntityRegister.registerClient();
+		TileEntityRegister.registerClient();
 
 		ModelBakery.registerItemVariants(ItemsRegister.RUNE,
 				new ResourceLocation(Core.MODID, "rune_" + ItemRune.EnumRune.BLANK.getName()),

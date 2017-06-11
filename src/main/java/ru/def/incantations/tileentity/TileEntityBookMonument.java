@@ -17,7 +17,7 @@ public class TileEntityBookMonument extends TileEntity {
 	public float yaw=0;
 	public ItemStack stack = ItemStack.EMPTY;
 
-	public void setStack(World world, BlockPos pos, ItemStack stack,float yaw){
+	public void setStack(World world, BlockPos pos, ItemStack stack, float yaw){
 		this.stack = stack;
 		this.yaw=yaw;
 
@@ -49,11 +49,9 @@ public class TileEntityBookMonument extends TileEntity {
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 
-		this.stack = new ItemStack((NBTTagCompound)tag.getTag("item"));
+		this.stack = new ItemStack((NBTTagCompound)tag.getTag("stack"));
 		yaw=tag.getFloat("yaw");
 	}
-
-
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
@@ -61,7 +59,7 @@ public class TileEntityBookMonument extends TileEntity {
 
 		NBTTagCompound s_tag = new NBTTagCompound();
 		this.stack.writeToNBT(s_tag);
-		tag.setTag("item", s_tag);
+		tag.setTag("stack", s_tag);
 
 		tag.setFloat("yaw",yaw);
 

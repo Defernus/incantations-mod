@@ -15,6 +15,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import ru.def.incantations.CreativeTabsHandler;
 import ru.def.incantations.incantations.IncantationHandler;
+import ru.def.incantations.net.NetworkHandler;
+import ru.def.incantations.net.PacketParticlesMP;
 
 import javax.annotation.Nullable;
 
@@ -120,6 +122,7 @@ public class ItemIncantationsBook extends Item {
 
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+
 		if(stack.getTagCompound()==null){
 			setNBT(stack);
 		}

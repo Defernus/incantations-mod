@@ -24,6 +24,12 @@ public class IslandGenerator implements IWorldGenerator {
 	private static int level = 200;
 	private static final List<Biome> ALLOWED_BIOMES = Arrays.asList(Biomes.OCEAN, Biomes.DEEP_OCEAN);
 
+	private static IBlockState
+			STONE = Blocks.STONE.getDefaultState(),
+			GRASS = Blocks.GRASS.getDefaultState(),
+			DIRT = Blocks.DIRT.getDefaultState(),
+			ORE = BlocksRegister.SKY_IRON_ORE.getDefaultState();
+
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
 		if (world.isRemote || !world.getWorldInfo().isMapFeaturesEnabled()) {
@@ -62,7 +68,7 @@ public class IslandGenerator implements IWorldGenerator {
 		i += random.nextInt(12);
 		j += random.nextInt(12);
 
-		if( i == chunkX && j == chunkZ ){//&& world.getBiomeProvider().areBiomesViable(chunkX*16+8, chunkZ*16+8, 16, ALLOWED_BIOMES) ) {
+		if( i == chunkX && j == chunkZ){//&& world.getBiomeProvider().areBiomesViable(chunkX*16+8, chunkZ*16+8, 16, ALLOWED_BIOMES) ) {
 			return true;
 		}
 
@@ -100,24 +106,31 @@ public class IslandGenerator implements IWorldGenerator {
 
 		NoiseGeneratorPerlin perlin = new NoiseGeneratorPerlin(rnd, 2);
 
-		int imax, imin, kmax, kmin;
+		int iMax, iMin, kMax, kMin;
 
-		imin = scX*16-8;
-		imax = (scX+1)*16-8;
-		kmin = scZ*16-8;
-		kmax = (scZ+1)*16-8;
+		iMin = scX*16-8;
+		iMax = (scX+1)*16-8;
+		kMin = scZ*16-8;
+		kMax = (scZ+1)*16-8;
 
 		int c = 0;
 
-		for(int i = imin; i < imax; i++) {
-			for(int k = kmin; k < kmax; k++) {
+		for(int i = iMin; i < iMax; i++) {
+			for(int k = kMin; k < kMax; k++) {
 				int gh = (int)perlin.getValue(i/3.,k/3.)+4;
 				double tp = perlin.getValue((x+i)/35., (z+k)/35.);
 				int tH = (int)( tp+h*(1.-(i*i+k*k)/(d*d/4.))/10. );
 				double l = Math.sqrt(i*i+k*k);
-				int bH = (int)( perlin.getValue((x+i)+100., (z+k)+100.)*(d/2-l)/10. + perlin.getValue((x+i)/50., (z+k)/50.)*((d/2-l)/5.+7) - ((d/2)-l) - 4);//(d*d)/(i*i+k*k+d) );
 
-				//System.out.println("dH at "+i+"_"+k+" = "+((d/2+2)*(d/2+2)-((i+2)*(i+2)+(k+2)*(k+2)))/h);
+				double gr = (d/2-l);
+				double grp = gr<0?0:gr;
+
+				double st = perlin.getValue((x+i)+100., (z+k)+100.)*grp/10.;
+
+				double dHPre = perlin.getValue((x+i)/50., (z+k)/50.)*(gr/5.+7) - gr - 4;
+
+				int bH = (int)( st*(dHPre/h)*10 + dHPre);
+
 				if(i*i+k*k > (d/2)*(d/2)+tH && i*i+k*k < bH) {
 					continue;
 				}
@@ -129,14 +142,14 @@ public class IslandGenerator implements IWorldGenerator {
 
 					IBlockState block;
 					if(j == tH-1) {
-						block = Blocks.GRASS.getDefaultState();
+						block = GRASS;
 					}else if(j > tH-gh) {
-						block = Blocks.DIRT.getDefaultState();
+						block = DIRT;
 					}else {
 						if(rnd.nextInt( i*i+j*j+k*k+1 ) == 0) {
-							block = BlocksRegister.SKY_IRON_ORE.getDefaultState();
+							block = ORE;
 						}else {
-							block = Blocks.STONE.getDefaultState();
+							block = STONE;
 						}
 					}
 

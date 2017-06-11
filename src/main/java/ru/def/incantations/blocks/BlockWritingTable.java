@@ -32,10 +32,10 @@ import javax.annotation.Nullable;
  */
 public class BlockWritingTable extends Block implements ITileEntityProvider{
 
-	protected static final AxisAlignedBB AABB = new AxisAlignedBB(0D, 0.0D, 0D, 1D, 0.9375D, 1D);
+	private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.938, 1);
 
-	public BlockWritingTable(Material materialIn) {
-		super(materialIn);
+	public BlockWritingTable() {
+		super(Material.ROCK);
 
 		this.setUnlocalizedName("writing_table");
 		this.setRegistryName( "writing_table");
@@ -72,9 +72,7 @@ public class BlockWritingTable extends Block implements ITileEntityProvider{
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-
-		if(!world.isRemote)
-		{
+		if(!world.isRemote) {
 			if(!player.getHeldItem(hand).isEmpty()&&player.getHeldItem(hand).getItem()!=ItemsRegister.BLANK_SCROLL&&player.getHeldItem(hand).getItem()!= ItemsRegister.RUNE&&player.getHeldItem(hand).getItem()!= Items.DYE)return false;
 
 			TileEntityWritingTable te=(TileEntityWritingTable)world.getTileEntity(pos);

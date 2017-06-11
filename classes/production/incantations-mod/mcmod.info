@@ -1,0 +1,16 @@
+[
+{
+  "modid": "incantations",
+  "name": "Incantations Mod",
+  "description": "Mod that adds to minecraft incantations!!!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Defernus"],
+  "credits": "Defernus",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

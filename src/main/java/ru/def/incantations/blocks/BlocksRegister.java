@@ -15,16 +15,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public class BlocksRegister {
 
-	public static BlockBookMonument BOOK_MONUMENT = new BlockBookMonument(Material.ROCK);
-	public static BlockWritingTable WRITING_TABLE = new BlockWritingTable(Material.ROCK);
-	public static BlockQuartzLamp QUARTZ_LAMP = new BlockQuartzLamp(Material.ROCK);
-	public static BlockSkyIronOre SKY_IRON_ORE = new BlockSkyIronOre(Material.ROCK);
+	public static BlockBookMonument BOOK_MONUMENT = new BlockBookMonument();
+	public static BlockWritingTable WRITING_TABLE = new BlockWritingTable();
+	public static BlockQuartzLamp QUARTZ_LAMP = new BlockQuartzLamp();
+	public static BlockQuartzBookshelf QUARTZ_BOOKSHELF = new BlockQuartzBookshelf();
+	public static BlockSkyIronOre SKY_IRON_ORE = new BlockSkyIronOre();
+	public static BlockSkyIronBlock SKY_IRON_BLOCK = new BlockSkyIronBlock();
+	public static BlockSkyChargingTable SKY_CHARGING_TABLE = new BlockSkyChargingTable();
 
 	public static void registerBlocks() {
 		registerBlock(BOOK_MONUMENT);
 		registerBlock(WRITING_TABLE);
 		registerBlock(QUARTZ_LAMP);
+		registerBlock(QUARTZ_BOOKSHELF);
 		GameRegistry.register(SKY_IRON_ORE);
+		GameRegistry.register(SKY_IRON_BLOCK);
+		GameRegistry.register(SKY_CHARGING_TABLE);
 	}
 
 	private static void registerBlock(final Block block)
@@ -37,7 +43,10 @@ public class BlocksRegister {
 		registerRender(BOOK_MONUMENT);
 		registerRender(WRITING_TABLE);
 		registerRender(QUARTZ_LAMP);
+		registerRender(QUARTZ_BOOKSHELF);
 		registerRender(SKY_IRON_ORE);
+		registerRender(SKY_IRON_BLOCK);
+		registerRender(SKY_CHARGING_TABLE);
 	}
 
 	@SideOnly(Side.CLIENT)

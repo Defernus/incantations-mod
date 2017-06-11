@@ -10,6 +10,6 @@ public class GeneratorsRegister {
 	public static IslandGenerator ISLAND = new IslandGenerator();
 
 	public static void register() {
-		GameRegistry.registerWorldGenerator(ISLAND, 100);
+		GameRegistry.registerWorldGenerator(ISLAND, 1000);
 	}
 }

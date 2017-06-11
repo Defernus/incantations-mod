@@ -25,7 +25,7 @@ public class Core
 	public static CommonProxy proxy;
 
 	@Mod.Instance
-	public static Core instance;
+	public static Core INSTANCE;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)

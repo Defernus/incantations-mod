@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "blocks/quartz_block_chiseled_top",
+        "side": "incantations:blocks/quartz_bookshelf"
+    }
+}

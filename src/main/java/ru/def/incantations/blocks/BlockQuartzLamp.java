@@ -9,8 +9,8 @@ import ru.def.incantations.CreativeTabsHandler;
  */
 public class BlockQuartzLamp extends Block {
 
-	public BlockQuartzLamp(Material mat) {
-		super(mat);
+	public BlockQuartzLamp() {
+		super(Material.ROCK);
 
 		this.setRegistryName("quartz_lamp");
 		this.setUnlocalizedName("quartz_lamp");

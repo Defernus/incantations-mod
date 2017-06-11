@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
-import ru.def.incantations.net.PacketHandler;
+import ru.def.incantations.net.NetworkHandler;
 import ru.def.incantations.net.PacketNextPage;
 
 /**
@@ -29,7 +29,7 @@ public class KeyBinder {
 		if (nextPage.isPressed())
 		{
 			//Minecraft.getMinecraft().player.sendChatMessage("nextPage pressed!");
-			PacketHandler.INSTANCE.sendToServer(new PacketNextPage());
+			NetworkHandler.INSTANCE.sendToServer(new PacketNextPage());
 		}
 	}
 }

@@ -17,9 +17,9 @@ public class RenderBookMonument extends TileEntitySpecialRenderer<TileEntityBook
 
 		super.renderTileEntityAt(te,x,y,z,partialTicks,destroyStage);
 
-		//EntityItem item=new EntityItem(te.getWorld(),0,0,0,te.inv.getStackInSlot(0));
+		//EntityItem stack=new EntityItem(te.getWorld(),0,0,0,te.inv.getStackInSlot(0));
 
-		//item.hoverStart=0;
+		//stack.hoverStart=0;
 
 		GlStateManager.pushMatrix();
 		GlStateManager.disableLighting();
@@ -34,7 +34,7 @@ public class RenderBookMonument extends TileEntitySpecialRenderer<TileEntityBook
 				RenderIncantationsBook.renderBook(te.stack, light);
 			}
 
-			//Minecraft.getMinecraft().getRenderManager().doRenderEntity(item,0,0,0,0,0,false);
+			//Minecraft.getMinecraft().getRenderManager().doRenderEntity(stack,0,0,0,0,0,false);
 		}
 		GlStateManager.enableLighting();
 		GlStateManager.popMatrix();
