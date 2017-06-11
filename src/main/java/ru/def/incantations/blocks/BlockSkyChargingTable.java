@@ -22,8 +22,7 @@ import ru.def.incantations.items.IChargeable;
 import ru.def.incantations.items.ItemSkyChargingWand;
 import ru.def.incantations.items.ItemSkyIronIngot;
 import ru.def.incantations.items.ItemsRegister;
-import ru.def.incantations.net.NetworkHandler;
-import ru.def.incantations.net.PacketParticlesMP;
+import ru.def.incantations.net.*;
 import ru.def.incantations.tileentity.TileEntitySkyChargingTable;
 
 import javax.annotation.Nullable;
@@ -82,7 +81,8 @@ public class BlockSkyChargingTable extends Block implements ITileEntityProvider 
 					if(player.getHeldItem(hand).getItem() instanceof ItemSkyChargingWand) {
 						boolean ch = te.charge(player);
 						if(ch) {
-							NetworkHandler.sendToServer(new PacketParticlesMP(pos.getX(), pos.getY(), pos.getZ()));
+							NetworkHandler.INSTANCE.sendToAllAround(new PacketChargingParticle(player.posX, player.posY, player.posZ, pos.getX(), pos.getY(), pos.getZ()), world);
+							//NetworkHandler.INSTANCE.sendToServer(new PacketParticlesMP(pos.getX(), pos.getY(), pos.getZ()));
 							return false;
 						}
 					}

@@ -8,6 +8,8 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import ru.def.incantations.particles.ParticleCharging;
 
 import java.util.Random;
@@ -17,11 +19,11 @@ import java.util.Random;
  */
 public class PacketChargingParticle extends LocationDoublePacket<PacketChargingParticle>
 {
-	private static double px, py, pz, lx, ly, lz;
-
 	private static Random rnd = new Random();
 
-	public PacketChargingParticle() {}
+	public PacketChargingParticle() {
+		super();
+	}
 
 	public PacketChargingParticle(final double px, final double py, final double pz, final double lx, final double ly, final double lz)
 	{
@@ -33,9 +35,12 @@ public class PacketChargingParticle extends LocationDoublePacket<PacketChargingP
 		this.ly = ly;
 		this.lz = lz;
 	}
+
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void handleClientSide(final EntityPlayer player)
 	{
+		System.out.println("test px = "+px);
 		double pos_x, pos_y, pos_z;
 		double r = .5;
 

@@ -10,9 +10,11 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
  */
 public abstract  class LocationDoublePacket<REQ extends IMessage> extends AbstractPacket<REQ>
 {
-	protected double px, py, pz, lx, ly, lz;
+	protected static double px, py, pz, lx, ly, lz;
 
-	public LocationDoublePacket(){}
+	public LocationDoublePacket(){
+
+	}
 
 	public LocationDoublePacket(final double px, final double py, final double pz, final double lx, final double ly, final double lz)
 	{

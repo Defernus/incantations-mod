@@ -1,16 +1,9 @@
 package ru.def.incantations.net;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -42,7 +35,7 @@ public class PacketNextPage implements IMessage {
 		}
 
 		private void handle(PacketNextPage message, MessageContext ctx) {
-			EntityPlayerMP playerEntity = ctx.getServerHandler().playerEntity;
+			EntityPlayer playerEntity = ctx.getServerHandler().playerEntity;
 			ItemStack stack = playerEntity.getHeldItem( EnumHand.MAIN_HAND ).getItem() instanceof ItemIncantationsBook?playerEntity.getHeldItem( EnumHand.MAIN_HAND ):playerEntity.getHeldItem( EnumHand.OFF_HAND ).getItem() instanceof ItemIncantationsBook?playerEntity.getHeldItem( EnumHand.OFF_HAND ):null;
 
 			System.out.println(System.currentTimeMillis()-stack.getTagCompound().getLong( "pageTurning"));

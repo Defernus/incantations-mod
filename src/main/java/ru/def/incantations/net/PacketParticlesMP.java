@@ -3,6 +3,8 @@ package ru.def.incantations.net;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Created by Defernus on 10.06.2017.
@@ -19,6 +21,8 @@ public class PacketParticlesMP extends AbstractPacket<PacketParticlesMP>
 		this.ly = ly;
 		this.lz = lz;
 	}
+
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void handleClientSide(final EntityPlayer player) {}
 
@@ -26,7 +30,7 @@ public class PacketParticlesMP extends AbstractPacket<PacketParticlesMP>
 	public void handleServerSide(final EntityPlayer player)
 	{
 
-		NetworkHandler.sendToAllAround(new PacketChargingParticle(player.posX, player.posY, player.posZ, lx, ly, lz), player.world);
+		NetworkHandler.INSTANCE.sendToAllAround(new PacketChargingParticle(player.posX, player.posY, player.posZ, lx, ly, lz), player.world);
 	}
 
 	@Override

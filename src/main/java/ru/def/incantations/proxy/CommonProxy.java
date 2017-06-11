@@ -22,7 +22,7 @@ public class CommonProxy {
 		BlocksRegister.registerBlocks();
 		TileEntityRegister.register();
 
-		NetworkHandler.init();
+		NetworkHandler.INSTANCE.init();
 
 		GeneratorsRegister.register();
 	}
