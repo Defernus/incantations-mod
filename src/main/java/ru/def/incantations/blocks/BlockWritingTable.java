@@ -40,6 +40,9 @@ public class BlockWritingTable extends Block implements ITileEntityProvider{
 		this.setUnlocalizedName("writing_table");
 		this.setRegistryName( "writing_table");
 
+		this.setHarvestLevel("pickaxe", 1);
+		this.setHardness(0.8F);
+
 		this.setSoundType(SoundType.STONE);
 
 		this.setCreativeTab(CreativeTabsHandler.MY_TAB);

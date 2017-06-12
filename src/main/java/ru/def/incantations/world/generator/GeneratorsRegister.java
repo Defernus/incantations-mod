@@ -1,5 +1,6 @@
 package ru.def.incantations.world.generator;
 
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**

@@ -12,6 +12,9 @@ public class BlockQuartzLamp extends Block {
 	public BlockQuartzLamp() {
 		super(Material.ROCK);
 
+		this.setHarvestLevel("pickaxe", 1);
+		this.setHardness(0.8F);
+
 		this.setRegistryName("quartz_lamp");
 		this.setUnlocalizedName("quartz_lamp");
 		this.setLightLevel(1.0F);

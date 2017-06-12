@@ -18,7 +18,8 @@ public class BlocksRegister {
 	public static BlockBookMonument BOOK_MONUMENT = new BlockBookMonument();
 	public static BlockWritingTable WRITING_TABLE = new BlockWritingTable();
 	public static BlockQuartzLamp QUARTZ_LAMP = new BlockQuartzLamp();
-	public static BlockQuartzBookshelf QUARTZ_BOOKSHELF = new BlockQuartzBookshelf();
+	public static Block QUARTZ_BOOKSHELF = (new BlockQuartzBookshelf(false)).setRegistryName("quartz_bookshelf").setUnlocalizedName("quartz_bookshelf");
+	public static Block QUARTZ_BOOKSHELF_ANCIENT = (new BlockQuartzBookshelf(true)).setRegistryName("quartz_bookshelf_ancient").setUnlocalizedName("quartz_bookshelf_ancient");
 	public static BlockSkyIronOre SKY_IRON_ORE = new BlockSkyIronOre();
 	public static BlockSkyIronBlock SKY_IRON_BLOCK = new BlockSkyIronBlock();
 	public static BlockSkyChargingTable SKY_CHARGING_TABLE = new BlockSkyChargingTable();
@@ -28,6 +29,7 @@ public class BlocksRegister {
 		registerBlock(WRITING_TABLE);
 		registerBlock(QUARTZ_LAMP);
 		registerBlock(QUARTZ_BOOKSHELF);
+		registerBlock(QUARTZ_BOOKSHELF_ANCIENT);
 		GameRegistry.register(SKY_IRON_ORE);
 		GameRegistry.register(SKY_IRON_BLOCK);
 		GameRegistry.register(SKY_CHARGING_TABLE);
@@ -44,6 +46,7 @@ public class BlocksRegister {
 		registerRender(WRITING_TABLE);
 		registerRender(QUARTZ_LAMP);
 		registerRender(QUARTZ_BOOKSHELF);
+		registerRender(QUARTZ_BOOKSHELF_ANCIENT);
 		registerRender(SKY_IRON_ORE);
 		registerRender(SKY_IRON_BLOCK);
 		registerRender(SKY_CHARGING_TABLE);

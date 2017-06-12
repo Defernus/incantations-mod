@@ -14,7 +14,7 @@ public class NetworkHandler
 {
 	public static final NetworkHandler INSTANCE = new NetworkHandler();
 	// NetworkName - название канала
-	public static final SimpleNetworkWrapper NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel(Core.MODID+":network");
+	public static final SimpleNetworkWrapper NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel(Core.MODID+"_net");
 	private static int dec;
 
 	public NetworkHandler(){}
@@ -30,14 +30,12 @@ public class NetworkHandler
 	public void sendToAllAround(final LocationDoublePacket message, final World world) {
 		sendToAllAround(message, message.getTargetPoint(world));
 	}
+
 	//Метод который отправляет пакет всем игрокам от отправителя, в определённом радиусе.
 	public void sendToAllAround(final IMessage message, final NetworkRegistry.TargetPoint point) {
 		NETWORK.sendToAllAround(message, point);
 	}
-	//Метод который отправляет пакет в определённое измерение.
-	public void sendToDimension(final IMessage message, final int dimensionId) {
-		NETWORK.sendToDimension(message, dimensionId);
-	}
+
 	//Метод который отправляет пакет на сервер.
 	public void sendToServer(final IMessage message){
 		NETWORK.sendToServer(message);

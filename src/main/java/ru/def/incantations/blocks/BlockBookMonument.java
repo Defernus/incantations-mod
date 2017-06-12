@@ -35,6 +35,9 @@ public class BlockBookMonument extends Block implements ITileEntityProvider {
 	public BlockBookMonument() {
 		super(Material.ROCK);
 
+		this.setHarvestLevel("pickaxe", 1);
+		this.setHardness(0.8F);
+
 		this.setUnlocalizedName("book_monument");
 		this.setRegistryName( "book_monument");
 
@@ -66,14 +69,14 @@ public class BlockBookMonument extends Block implements ITileEntityProvider {
 					double z = player.getLook(1).zCoord;
 					float yaw = (float)(MathHelper.atan2(z,x)/Math.PI*180)-90;//player.getHorizontalFacing().getHorizontalAngle();
 
-					((TileEntityBookMonument)entity).setStack(world,pos,player.getHeldItem(hand),yaw);
+					((TileEntityBookMonument)entity).setStack(player.getHeldItem(hand),yaw);
 					player.setHeldItem(hand,ItemStack.EMPTY);
 					return true;
 
 				}else if( !((TileEntityBookMonument)entity).stack.isEmpty() && ((TileEntityBookMonument)entity).stack.getItem() instanceof ItemIncantationsBook && (player.getHeldItem(hand).isEmpty()) ){
 
 					player.setHeldItem(hand,((TileEntityBookMonument)entity).stack);
-					((TileEntityBookMonument)entity).setStack(world, pos, ItemStack.EMPTY, player.getHorizontalFacing().getHorizontalAngle());
+					((TileEntityBookMonument)entity).setStack(ItemStack.EMPTY, player.getHorizontalFacing().getHorizontalAngle());
 					return true;
 
 				}else if(!((TileEntityBookMonument)entity).stack.isEmpty() && player.getHeldItem(hand).getItem() == ItemsRegister.WRITTEN_SCROLL_CHARGED){

@@ -13,7 +13,7 @@ import ru.def.incantations.items.blocks.ItemBlockSkyIronBlock;
 import ru.def.incantations.items.blocks.ItemBlockSkyIronOre;
 
 /**
- * Created by Dfernus on 10.05.2017.
+ * Created by Defernus on 10.05.2017.
  */
 public class ItemsRegister {
 
@@ -28,7 +28,7 @@ public class ItemsRegister {
 	public static Item BLANK_SCROLL=(new Item()).setUnlocalizedName("scroll_blank").setRegistryName("scroll_blank").setCreativeTab(CreativeTabsHandler.MY_TAB);
 	public static ItemSkyIronIngot SKY_IRON_INGOT=new ItemSkyIronIngot();
 	public static ItemSkyIronIngotCharged SKY_IRON_INGOT_CHARGED=new ItemSkyIronIngotCharged();
-	public static ItemSkyChargingWand SKY_CHARGING_WAND=new ItemSkyChargingWand();
+	public static Item SKY_CHARGING_WAND=(new ItemChargingWand()).setRegistryName("sky_charging_wand").setUnlocalizedName("sky_charging_wand");
 	public static ItemBlockSkyIronOre SKY_IRON_ORE=new ItemBlockSkyIronOre();
 	public static ItemBlockSkyIronBlock SKY_IRON_BLOCK=new ItemBlockSkyIronBlock();
 	public static ItemBlockSkyChargingTable SKY_CHARGING_TABLE=new ItemBlockSkyChargingTable();

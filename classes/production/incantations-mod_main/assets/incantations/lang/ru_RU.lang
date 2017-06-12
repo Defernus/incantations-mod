@@ -23,6 +23,8 @@ item.rune.explosion.name=Руна взрыва
 item.rune.projectile.name=Руна снаряда
 item.rune.fireball.name=Руна огненного шара
 item.rune.arrow.name=Руна стрелы
+tile.quartz_bookshelf.name=Книжная полка из кварца
+tile.quartz_bookshelf_ancient.name=Древняя книжная полка из кварца
 
 #block
 tile.book_monument.name=Стойка для книги заклинаний
